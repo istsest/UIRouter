@@ -1,0 +1,15 @@
+{
+  "originHash" : "e5f88ca92a137a2c6014a230ffc79760b24584294c2d9f5ed3e3488096e25328",
+  "pins" : [
+    {
+      "identity" : "uirouter",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/istsest/UIRouter",
+      "state" : {
+        "revision" : "ea70eab6e2d154c5bfcb9ec8839ae6611ea4a229",
+        "version" : "0.0.1"
+      }
+    }
+  ],
+  "version" : 3
+}

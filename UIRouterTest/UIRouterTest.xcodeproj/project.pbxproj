@@ -94,6 +94,9 @@
 			);
 			mainGroup = AFD7B7F42EE78EB1002FE922;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				AFD7B8312EE7918E002FE922 /* XCRemoteSwiftPackageReference "UIRouter" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = AFD7B7FE2EE78EB1002FE922 /* Products */;
 			projectDirPath = "";
@@ -332,6 +335,17 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		AFD7B8312EE7918E002FE922 /* XCRemoteSwiftPackageReference "UIRouter" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/istsest/UIRouter";
+			requirement = {
+				kind = upToNextMinorVersion;
+				minimumVersion = 0.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
 	};
 	rootObject = AFD7B7F52EE78EB1002FE922 /* Project object */;
 }
