@@ -6,8 +6,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/istsest/UIRouter",
       "state" : {
-        "revision" : "ea70eab6e2d154c5bfcb9ec8839ae6611ea4a229",
-        "version" : "0.0.1"
+        "revision" : "a07f83ba26e103b59ccaf2865e598ccf0c3197b5",
+        "version" : "0.0.2"
       }
     }
   ],
