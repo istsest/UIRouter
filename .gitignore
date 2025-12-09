@@ -1,4 +1,6 @@
-UIRouterTest/UIRouterTest.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/Package.resolved
-/UIRouterTest/UIRouterTest.xcodeproj/project.xcworkspace
-/UIRouterTest/UIRouterTest.xcodeproj/project.xcworkspace
-*.resolved
+# Xcode
+#
+# gitignore contributors: remember to update Global/Xcode.gitignore, Objective-C.gitignore & Swift.gitignore
+
+## User settings
+xcuserdata/

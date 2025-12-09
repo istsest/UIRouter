@@ -109,7 +109,7 @@
 			mainGroup = AFD7B7F42EE78EB1002FE922;
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
-				AFD7B87C2EE7993A002FE922 /* XCRemoteSwiftPackageReference "UIRouter" */,
+				AFD7B87C2EE7993A002FE922 /* XCRemoteSwiftPackageReference "UIRouter-for-SwiftUI" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = AFD7B7FE2EE78EB1002FE922 /* Products */;
@@ -353,12 +353,12 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		AFD7B87C2EE7993A002FE922 /* XCRemoteSwiftPackageReference "UIRouter" */ = {
+		AFD7B87C2EE7993A002FE922 /* XCRemoteSwiftPackageReference "UIRouter-for-SwiftUI" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/istsest/UIRouter";
+			repositoryURL = "https://github.com/istsest/UIRouter-for-SwiftUI";
 			requirement = {
 				kind = upToNextMinorVersion;
-				minimumVersion = 0.0.3;
+				minimumVersion = 0.0.4;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
@@ -366,7 +366,7 @@
 /* Begin XCSwiftPackageProductDependency section */
 		AFD7B8AA2EE79A9A002FE922 /* UIRouter */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = AFD7B87C2EE7993A002FE922 /* XCRemoteSwiftPackageReference "UIRouter" */;
+			package = AFD7B87C2EE7993A002FE922 /* XCRemoteSwiftPackageReference "UIRouter-for-SwiftUI" */;
 			productName = UIRouter;
 		};
 /* End XCSwiftPackageProductDependency section */
