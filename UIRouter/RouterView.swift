@@ -13,7 +13,7 @@ public struct RouterView<Root: View>: View {
     
     private let root: Root
     
-    init(@ViewBuilder root: () -> Root) {
+    public init(@ViewBuilder root: () -> Root) {
         self.root = root()
     }
     
