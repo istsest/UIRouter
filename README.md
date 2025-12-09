@@ -28,8 +28,8 @@ Add UIRouter to your project using Swift Package Manager:
 #### In Xcode
 
 1. Select **File → Add Package Dependencies...**
-2. Enter the package repository URL: `https://github.com/yourusername/UIRouter.git`
-3. Select the version you want to use (e.g., "Up to Next Major Version" from 1.0.0)
+2. Enter the package repository URL: `https://github.com/istsest/UIRouter.git`
+3. Select the version you want to use (e.g., "Up to Next Major Version" from 0.0.3)
 4. Add the package to your target
 
 #### In Package.swift
@@ -45,7 +45,7 @@ let package = Package(
         .macOS(.v13)
     ],
     dependencies: [
-        .package(url: "https://github.com/yourusername/UIRouter.git", from: "1.0.0")
+        .package(url: "https://github.com/istsest/UIRouter.git", from: "0.0.3")
     ],
     targets: [
         .target(
@@ -56,7 +56,6 @@ let package = Package(
 )
 ```
 
-> **Important:** Make sure your core files are organized in the `Sources/UIRouter/` directory before publishing. See [PACKAGE_STRUCTURE.md](PACKAGE_STRUCTURE.md) for details.
 
 ## Quick Start
 
