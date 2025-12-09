@@ -19,10 +19,8 @@
 		AFD7B7DC2EE788F2002FE922 /* TabRouterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabRouterView.swift; sourceTree = "<group>"; };
 		AFD7B7DD2EE788F2002FE922 /* UIRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIRoute.swift; sourceTree = "<group>"; };
 		AFD7B7DE2EE788F2002FE922 /* UIRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIRouter.swift; sourceTree = "<group>"; };
-		AFD7B7EB2EE78BB3002FE922 /* PACKAGE_README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = PACKAGE_README.md; path = ../PACKAGE_README.md; sourceTree = SOURCE_ROOT; };
-		AFD7B7EC2EE78BB3002FE922 /* PACKAGE_STRUCTURE.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = PACKAGE_STRUCTURE.md; path = ../PACKAGE_STRUCTURE.md; sourceTree = SOURCE_ROOT; };
 		AFD7B7ED2EE78BB3002FE922 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = SOURCE_ROOT; };
-		AFD7B83A2EE792ED002FE922 /* PACKAGE_STRUCTURE.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = PACKAGE_STRUCTURE.md; sourceTree = "<group>"; };
+		AFD7B9202EE7A51A002FE922 /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Package.swift; path = ../Package.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -47,13 +45,11 @@
 		AFD7B7C42EE78892002FE922 = {
 			isa = PBXGroup;
 			children = (
-				AFD7B7EB2EE78BB3002FE922 /* PACKAGE_README.md */,
-				AFD7B7EC2EE78BB3002FE922 /* PACKAGE_STRUCTURE.md */,
+				AFD7B9202EE7A51A002FE922 /* Package.swift */,
 				AFD7B7ED2EE78BB3002FE922 /* README.md */,
 				AFD7B7DF2EE788F2002FE922 /* UIRouter */,
 				AFD7B7CF2EE78892002FE922 /* TabRouterTest */,
 				AFD7B7CE2EE78892002FE922 /* Products */,
-				AFD7B83A2EE792ED002FE922 /* PACKAGE_STRUCTURE.md */,
 			);
 			sourceTree = "<group>";
 		};
