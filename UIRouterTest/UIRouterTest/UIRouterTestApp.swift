@@ -6,12 +6,15 @@
 //
 
 import SwiftUI
+import UIRouter
 
 @main
 struct UIRouterTestApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            RouterView {
+                ContentView()
+            }
         }
     }
 }
