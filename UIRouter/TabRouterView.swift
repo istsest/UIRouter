@@ -12,7 +12,7 @@ public struct UIRouteTabItem<Tab: Hashable> {
     let label: AnyView
     let content: AnyView
     
-    init<Label: View, Content: View>(
+    public init<Label: View, Content: View>(
         tag: Tab,
         @ViewBuilder label: () -> Label,
         @ViewBuilder content: () -> Content
@@ -40,7 +40,7 @@ public struct TabRouterView<Tab: Hashable>: View {
     
     private let tabs: [UIRouteTabItem<Tab>]
     
-    init(tabs: [UIRouteTabItem<Tab>], initialTab: Tab) {
+    public init(tabs: [UIRouteTabItem<Tab>], initialTab: Tab) {
         self._coordinator = StateObject(wrappedValue: TabCoordinator(initialTab: initialTab))
         self.tabs = tabs
     }
