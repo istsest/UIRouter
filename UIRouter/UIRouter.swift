@@ -267,7 +267,13 @@ private extension UIRouter {
         
         // If already transitioning, queue this dismiss operation with retry limit
         guard !isTransitioning else {
-            guard retryCount < Self.maxRetryAttempts else { return }
+            if retryCount >= Self.maxRetryAttempts {
+#if DEBUG
+                print("UIRouter.dismissToIndex: Dropping dismiss to index \(targetIndex) after \(retryCount) retries. Current modal depth: \(modalStack.count).")
+#endif
+                return
+            }
+            
             DispatchQueue.main.asyncAfter(deadline: .now() + Self.modalTransitionDuration) { [weak self] in
                 self?.dismissToIndex(targetIndex, retryCount: retryCount + 1)
             }
