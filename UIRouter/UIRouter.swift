@@ -223,7 +223,8 @@ private extension UIRouter {
         
         // Safely capture the topmost modal before modification
         guard let lastModal = modalStack.last else {
-            isTransitioning = false
+            // Even in unexpected states, use the normal completion flow
+            scheduleTransitionCompletion()
             return
         }
         
