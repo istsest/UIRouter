@@ -356,7 +356,7 @@ struct ModalLevelView: View {
                         
                         if level > 1 {
                             Button("Dismiss to Level 1") {
-                                router.dismissModalsAfter(AppRoute.modalLevel(1))
+                                router.dismissModalsAbove(AppRoute.modalLevel(1))
                             }
                             .buttonStyle(.bordered)
                             .tint(.orange)

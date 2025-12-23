@@ -204,10 +204,10 @@ router.dismissModals(2)
 router.dismissAllModals()
 
 // Dismiss modals after a specific route (keeps the specified route)
-router.dismissModalsAfter(AppRoute.firstModal)
+router.dismissModalsAbove(AppRoute.firstModal)
 
 // Dismiss modals up to and including a specific route
-router.dismissModalsTo(AppRoute.secondModal)
+router.dismissModalsThrough(AppRoute.secondModal)
 ```
 
 ### Tab Management (TabRouterView only)

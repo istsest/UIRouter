@@ -65,26 +65,57 @@ public extension UIRouter {
 
 // MARK: - Modal Presentation Methods
 public extension UIRouter {
+    /// Presents a route as a sheet modal.
+    ///
+    /// If a transition is in progress, the modal is automatically queued and
+    /// presented after the current transition completes. This ensures smooth
+    /// animations without conflicts.
+    ///
+    /// - Parameter route: The route to present as a sheet
     func presentSheet(_ route: any UIRoute) {
         let modal = ModalRoute(route: route, style: .sheet)
         enqueueOrPresent(modal)
     }
     
+    /// Presents a route as a full screen cover modal.
+    ///
+    /// If a transition is in progress, the modal is automatically queued and
+    /// presented after the current transition completes. This ensures smooth
+    /// animations without conflicts.
+    ///
+    /// - Parameter route: The route to present as a full screen cover
     func presentFullScreenCover(_ route: any UIRoute) {
         let modal = ModalRoute(route: route, style: .fullScreenCover)
         enqueueOrPresent(modal)
     }
     
+    /// Dismisses the topmost modal in the stack.
+    ///
+    /// If a transition is in progress, the dismiss operation is queued and
+    /// executed after the current transition completes. Only the topmost modal's
+    /// dismiss animation is shown.
     func dismissModal() {
         guard !modalStack.isEmpty else { return }
         dismissToIndex(modalStack.count - 1)
     }
     
+    /// Dismisses all modals in the stack.
+    ///
+    /// When multiple modals are dismissed, intermediate modals are removed
+    /// instantly (without animation) and only the topmost modal animates out.
+    /// If a transition is in progress, this operation is queued.
     func dismissAllModals() {
         guard !modalStack.isEmpty else { return }
         dismissToIndex(0)
     }
     
+    /// Dismisses a specific number of modals from the top of the stack.
+    ///
+    /// When multiple modals are dismissed, intermediate modals are removed
+    /// instantly (without animation) and only the topmost modal animates out.
+    /// If a transition is in progress, this operation is queued.
+    ///
+    /// - Parameter count: The number of modals to dismiss (must be > 0)
     func dismissModals(_ count: Int) {
         guard count > 0 else { return }
         let removeCount = min(count, modalStack.count)
@@ -92,10 +123,10 @@ public extension UIRouter {
         dismissToIndex(targetIndex)
     }
     
-    /// Dismisses all modals positioned above (later than) a specific route in the modal stack.
+    /// Dismisses all modals above a specific route in the modal stack.
     ///
-    /// The specified route and all modals below it (earlier in the stack) are retained.
-    /// For example, if the stack is [A, B, C, D] and you call `dismissModalsAfter(B)`,
+    /// The specified route and all modals below it are retained.
+    /// For example, if the stack is [A, B, C, D] and you call `dismissModalsAbove(B)`,
     /// the result will be [A, B].
     ///
     /// - Note: If the same route appears multiple times in the stack, only the first
@@ -103,32 +134,47 @@ public extension UIRouter {
     /// - Parameter route: The route to find; modals above this route will be dismissed
     /// - Returns: `true` if the route was found and modals were dismissed, `false` if not found
     @discardableResult
-    func dismissModalsAfter(_ route: any UIRoute) -> Bool {
+    func dismissModalsAbove(_ route: any UIRoute) -> Bool {
+        guard !modalStack.isEmpty else { return false }
         let targetRoute = AnyRoute(route)
         guard let index = modalStack.firstIndex(where: { AnyRoute($0.route) == targetRoute }) else {
             return false
         }
+        warnIfDuplicateRoutes(targetRoute, foundAt: index)
         dismissToIndex(index + 1)
         return true
     }
     
-    /// Dismisses all modals from a specific route upward, including the route itself.
+    /// Dismisses all modals through (including) a specific route.
     ///
-    /// For example, if the stack is [A, B, C, D] and you call `dismissModalsTo(B)`,
-    /// the result will be [A].
+    /// For example, if the stack is [A, B, C, D] and you call `dismissModalsThrough(B)`,
+    /// the result will be [A]. The specified route (B) is also dismissed.
     ///
     /// - Note: If the same route appears multiple times in the stack, only the first
     ///   occurrence is matched. Consider using index-based methods for precise control.
     /// - Parameter route: The route to find; this route and all above it will be dismissed
     /// - Returns: `true` if the route was found and modals were dismissed, `false` if not found
     @discardableResult
-    func dismissModalsTo(_ route: any UIRoute) -> Bool {
+    func dismissModalsThrough(_ route: any UIRoute) -> Bool {
+        guard !modalStack.isEmpty else { return false }
         let targetRoute = AnyRoute(route)
         guard let index = modalStack.firstIndex(where: { AnyRoute($0.route) == targetRoute }) else {
             return false
         }
+        warnIfDuplicateRoutes(targetRoute, foundAt: index)
         dismissToIndex(index)
         return true
+    }
+    
+    private func warnIfDuplicateRoutes(_ targetRoute: AnyRoute, foundAt firstIndex: Int) {
+        #if DEBUG
+        let duplicateCount = modalStack.dropFirst(firstIndex + 1)
+            .filter { AnyRoute($0.route) == targetRoute }
+            .count
+        if duplicateCount > 0 {
+            print("[UIRouter] Warning: Route appears \(duplicateCount + 1) times in modal stack. Only the first occurrence (index \(firstIndex)) was matched.")
+        }
+        #endif
     }
 }
 
