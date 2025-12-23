@@ -306,32 +306,37 @@ private extension UIRouter {
         
         isTransitioning = true
         
-        // If exactly one modal to dismiss, remove it with animation
+        // SINGLE MODAL PATH: When dismissing exactly one modal, we can simply
+        // remove it directly. SwiftUI handles the dismiss animation automatically.
         if modalStack.count - targetIndex == 1 {
             modalStack.removeLast()
             scheduleTransitionCompletion()
             return
         }
         
+        // MULTI-MODAL PATH: When dismissing multiple modals, we use a two-phase approach
+        // to prevent animation overlap:
+        // 1. Remove intermediate modals instantly (no animation) via withTransaction
+        // 2. Remove the topmost modal with animation on the next run loop
+        //
+        // The async dispatch is required because withTransaction needs to complete
+        // its update cycle before we trigger another state change. Without this delay,
+        // SwiftUI may batch both changes together, causing visual glitches.
+        
         // Safely capture the topmost modal before modification
         guard let lastModal = modalStack.last else {
-            // Unexpected state: no modal available to dismiss. Cancel the transition
-            // and process any pending modals immediately, since no animation will occur.
             isTransitioning = false
-            processPendingModals()
             return
         }
         
-        // Remove all intermediate modals without animation, keep only the topmost one
+        // Phase 1: Remove intermediate modals without animation
         var transaction = Transaction()
         transaction.disablesAnimations = true
         withTransaction(transaction) {
-            // Keep only target modals + the captured topmost one for animated dismissal
             modalStack = Array(modalStack.prefix(targetIndex)) + [lastModal]
         }
         
-        // Dismiss the remaining topmost modal with animation on next run loop
-        // to ensure the transaction above has fully completed
+        // Phase 2: Dismiss the topmost modal with animation on next run loop
         DispatchQueue.main.async { [weak self] in
             self?.modalStack.removeLast()
             self?.scheduleTransitionCompletion()
