@@ -234,11 +234,12 @@ private extension UIRouter {
             modalStack = Array(modalStack.prefix(targetIndex)) + [lastModal]
         }
         
-        // Dismiss the remaining topmost modal with animation
-        withAnimation {
-            _ = modalStack.removeLast()
+        // Dismiss the remaining topmost modal with animation on next run loop
+        // to ensure the transaction above has fully completed
+        DispatchQueue.main.async { [weak self] in
+            self?.modalStack.removeLast()
+            self?.scheduleTransitionCompletion()
         }
-        scheduleTransitionCompletion()
     }
     
     func scheduleTransitionCompletion() {
