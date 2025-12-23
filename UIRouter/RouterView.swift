@@ -31,6 +31,11 @@ public struct RouterView<Root: View>: View {
 }
 
 // MARK: - Modal Stack Modifier
+/// Recursively applies sheet/fullScreenCover modifiers for each modal in the stack.
+///
+/// - Note: Each modal presents the next modal via `.sheet()` or `.fullScreenCover()`.
+///   Very deep modal stacks (e.g., 10+ modals) may cause performance issues due to
+///   nested view hierarchy. For most use cases, keeping modal depth under 5-7 is recommended.
 private struct ModalStackModifier: ViewModifier {
     @ObservedObject var router: UIRouter
     let currentIndex: Int
