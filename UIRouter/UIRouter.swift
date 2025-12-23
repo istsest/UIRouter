@@ -269,7 +269,7 @@ private extension UIRouter {
         guard !isTransitioning else {
             if retryCount >= Self.maxRetryAttempts {
                 #if DEBUG
-                print("UIRouter.dismissToIndex: Dropping dismiss to index \(targetIndex) after \(retryCount) retries. Current modal depth: \(modalStack.count).")
+                print("[UIRouter] Warning: Dropping dismissToIndex(\(targetIndex)) after \(retryCount) retries. Current modal depth: \(modalStack.count).")
                 #endif
                 return
             }
