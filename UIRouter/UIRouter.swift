@@ -291,8 +291,10 @@ private extension UIRouter {
         
         // Safely capture the topmost modal before modification
         guard let lastModal = modalStack.last else {
-            // Even in unexpected states, use the normal completion flow
-            scheduleTransitionCompletion()
+            // Unexpected state: no modal available to dismiss. Cancel the transition
+            // and process any pending modals immediately, since no animation will occur.
+            isTransitioning = false
+            processPendingModals()
             return
         }
         
