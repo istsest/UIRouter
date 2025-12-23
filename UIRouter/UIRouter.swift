@@ -123,6 +123,16 @@ private extension UIRouter {
         }
     }
     
+    func scheduleTransitionCompletion() {
+        // Wait for dismiss animation to complete before processing pending modals
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.35) {
+            self.processPendingModals()
+        }
+    }
+}
+
+// MARK: - Internal Helpers
+internal extension UIRouter {
     /// Dismisses modals to a target index, animating only the topmost modal
     func dismissToIndex(_ targetIndex: Int) {
         guard modalStack.count > targetIndex else {
@@ -151,13 +161,6 @@ private extension UIRouter {
         DispatchQueue.main.async {
             self.modalStack.removeLast()
             self.scheduleTransitionCompletion()
-        }
-    }
-    
-    func scheduleTransitionCompletion() {
-        // Wait for dismiss animation to complete before processing pending modals
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.35) {
-            self.processPendingModals()
         }
     }
 }
