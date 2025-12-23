@@ -14,15 +14,25 @@ public extension UIRoute {
     var id: Self { self }
 }
 
-enum PresentationStyle {
+public enum PresentationStyle {
     case sheet
     case fullScreenCover
 }
 
-struct ModalRoute: Identifiable {
-    let id = UUID()
-    let route: any UIRoute
-    let style: PresentationStyle
+/// Represents a modal presentation in the modal stack.
+/// Each instance has a unique ID, so even modals wrapping the same route type
+/// are treated as distinct instances for SwiftUI's identity system.
+public struct ModalRoute: Identifiable {
+    /// Unique identifier for this modal instance.
+    /// Each ModalRoute gets a new UUID, ensuring distinct identity in the stack.
+    public let id = UUID()
+    public let route: any UIRoute
+    public let style: PresentationStyle
+    
+    public init(route: any UIRoute, style: PresentationStyle) {
+        self.route = route
+        self.style = style
+    }
 }
 
 struct AnyRoute: Hashable {
