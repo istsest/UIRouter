@@ -59,6 +59,9 @@ struct DetailView: View {
                 
                 Button("Pop") {
                     router.pop()
+                }
+                
+                Button("Dismiss Modal") {
                     router.dismissModal()
                 }
                 

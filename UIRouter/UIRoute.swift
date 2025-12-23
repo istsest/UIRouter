@@ -14,15 +14,15 @@ public extension UIRoute {
     var id: Self { self }
 }
 
-enum PresentationStyle {
+public enum PresentationStyle {
     case sheet
     case fullScreenCover
 }
 
 public struct ModalRoute: Identifiable {
     public let id = UUID()
-    let route: any UIRoute
-    let style: PresentationStyle
+    public let route: any UIRoute
+    public let style: PresentationStyle
 }
 
 struct AnyRoute: Hashable {

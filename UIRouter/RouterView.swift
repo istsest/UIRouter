@@ -83,9 +83,7 @@ private struct ModalStackModifier: ViewModifier {
     }
     
     private func dismissFromIndex() {
-        // When user dismisses via swipe, remove all modals from this index onwards
-        guard currentIndex < router.modalStack.count else { return }
-        router.modalStack.removeSubrange(currentIndex...)
+        router.handleSwipeDismiss(fromIndex: currentIndex)
     }
 }
 

@@ -13,6 +13,9 @@ public class UIRouter: ObservableObject {
     
     private var isTransitioning = false
     private var pendingModals: [ModalRoute] = []
+    
+    /// Duration to wait for modal transition animation to complete
+    private static let modalTransitionDuration: TimeInterval = 0.35
 }
 
 // MARK: - Navigation Methods
@@ -94,6 +97,22 @@ public extension UIRouter {
     }
 }
 
+// MARK: - Internal Helpers (for RouterView)
+extension UIRouter {
+    /// Called when user dismisses a modal via swipe gesture
+    func handleSwipeDismiss(fromIndex index: Int) {
+        guard index < modalStack.count else { return }
+        
+        isTransitioning = true
+        
+        // Remove all modals from this index onwards (SwiftUI handles animation)
+        modalStack.removeSubrange(index...)
+        
+        // Schedule pending modals processing after animation completes
+        scheduleTransitionCompletion()
+    }
+}
+
 // MARK: - Private Helpers
 private extension UIRouter {
     func enqueueOrPresent(_ modal: ModalRoute) {
@@ -115,7 +134,7 @@ private extension UIRouter {
         
         // Process remaining pending modals after a short delay
         if !pendingModals.isEmpty {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.35) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + Self.modalTransitionDuration) {
                 self.processPendingModals()
             }
         } else {
@@ -156,7 +175,7 @@ private extension UIRouter {
     
     func scheduleTransitionCompletion() {
         // Wait for dismiss animation to complete before processing pending modals
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.35) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + Self.modalTransitionDuration) {
             self.processPendingModals()
         }
     }
